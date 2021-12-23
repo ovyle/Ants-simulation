@@ -1,5 +1,5 @@
 # Ants-simulation
 
-Project created with c++
+Project created with c++, using SUBSYSTEM:WINDOWS
 
 This project is a school asignment
