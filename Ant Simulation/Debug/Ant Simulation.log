@@ -1,0 +1,11 @@
+﻿  win32_platform.cpp
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\renderer.cpp(36,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\renderer.cpp(37,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\renderer.cpp(38,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\renderer.cpp(39,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\sim.cpp(84,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\sim.cpp(86,95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\sim.cpp(135,8): warning C4101: 'pheromone_angle': unreferenced local variable
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\win32_platform.cpp(62,5): warning C4007: 'WinMain': must be '__stdcall'
+C:\Users\caspa\source\repos\Ant Simulation\Ant Simulation\win32_platform.cpp(63,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Ant Simulation.vcxproj -> C:\Users\caspa\source\repos\Ant Simulation\Debug\Ant Simulation.exe
