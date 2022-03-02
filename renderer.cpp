@@ -40,4 +40,3 @@ draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 
 	draw_rect_in_pixels(x0, y0, x1, y1, color);
 }
-
