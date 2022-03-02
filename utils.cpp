@@ -1,29 +1,13 @@
 #include <cmath>
 
-typedef char s8;
-typedef unsigned char u8;
-typedef short s16;
-typedef unsigned short u16; 
-typedef int s32;
 typedef unsigned int u32; 
-typedef long long s64;
-typedef unsigned long long u64;
+
 
 #define global_variable static
 #define positive_negative (rand() % 2 * 2 - 1)
 
-const float PI = 3.14159f, pheromone_sense_angle = PI * 0.5f, pheromone_turn_angle = 0.05f;
+const float PI = 3.14159f, pheromone_sense_angle = PI * 0.5f, pheromone_turn_angle = 0.04f;
 float a;
-
-
-bool less_or_equal(float lesser_num, float higher_num, bool more_equal) {
-    if (more_equal) {
-        return lesser_num <= higher_num;
-    }
-    else {
-        return lesser_num < higher_num;
-    }
-}
 
 float get_angle(float delta_x, float delta_y, float distance, float rotation) {
     if (delta_x < 0) {
@@ -61,19 +45,23 @@ float get_distance(float ant_x, float ant_y, float target_x, float target_y) {
 	return sqrtf(powf(target_x - ant_x, 2) + powf(ant_y - target_y, 2));
 }
 
-float pheromone_function(float angle) {
-    int concentration_left = 0;
-    int concentration_front = 0;
-    int concentration_right = 0;
+int concentration_left = 0;
+int concentration_front = 0;
+int concentration_right = 0;
+
+void pheromone_locate(float angle, int pheromone_strength) {
     if (angle > pheromone_sense_angle / 3) {
-        concentration_left++;
-    } 
+        concentration_left += pheromone_strength;
+    }
     else if (angle < -pheromone_sense_angle / 3) {
-        concentration_right++;
+        concentration_right += pheromone_strength;
     }
     else {
-        concentration_right++;
+        concentration_front += pheromone_strength;
     }
+}
+
+float pheromone_direction() {
     if (concentration_left > concentration_right && concentration_left > concentration_front) {
         return pheromone_turn_angle;
     }
@@ -83,6 +71,12 @@ float pheromone_function(float angle) {
     else {
         return 0.f;
     }
+}
+
+void pheromone_concentration_reset() {
+    concentration_left = 0;
+    concentration_front = 0;
+    concentration_right = 0;
 }
 
 inline int
