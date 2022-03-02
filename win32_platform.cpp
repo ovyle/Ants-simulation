@@ -1,6 +1,7 @@
 #include "utils.cpp"
 #include <windows.h>
 #include <time.h>
+#include <fstream>
 
 
 global_variable bool running = true;
@@ -13,13 +14,13 @@ struct Render_State {
 	BITMAPINFO bitmap_info;
 };
 global_variable Render_State render_state;
-global_variable float common_constant = 1;
-global_variable float window_start_width = 720.f * common_constant;
-global_variable float window_start_height = 720.f * common_constant;
+global_variable float window_start_width = 720.f;
+global_variable float window_start_height = 720.f;
 
 #include "renderer.cpp"
 #include "sim.cpp"
 
+using namespace std;
 
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	LRESULT result = 0;
@@ -65,6 +66,18 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	window_class.lpszClassName = TEXT("Game Window Class");
 	window_class.lpfnWndProc = window_callback;
 
+	// Createing file
+
+	ofstream logFile;
+
+	logFile.open("logs.txt", fstream::app);
+	logFile << "Start of sim" << endl;
+	logFile << "pheromone range is: " << scent_radius << endl;
+	logFile << "sight range is: " << sight_radius << endl;
+	logFile << "tactile range is: " << reach_radius << endl;
+
+
+
 	// Register class
 	RegisterClass(&window_class);
 
@@ -89,8 +102,25 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 		// Simulate
 		simulation();
 
+		// Data save and simulation reset
+		if (data_save) {
+			// Data save
+			logFile << iteration_count << ", \n";
+			iteration_count = 0;
+			simulation_count++;
+			data_save = false;
+
+			// Simulation reset
+			simulation_startup();
+			variable_reset();
+		}
+
+		// Check if all simulations are done
+		if (simulation_count == 100) {
+			running = false;
+		}
+
 		// Render
 		StretchDIBits(hdc, 0, 0, render_state.width, render_state.height, 0, 0, render_state.width, render_state.height, render_state.memory, &render_state.bitmap_info, DIB_RGB_COLORS, SRCCOPY);
 	}
 }
-
