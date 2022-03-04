@@ -1,8 +1,0 @@
-Start of sim
-pheromone range is:40
-sight range is:30
-tactlie range is:10
-Start of sim
-pheromone range is:40
-sight range is:30
-tactlie range is:10
